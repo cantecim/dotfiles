@@ -1,0 +1,26 @@
+[core]
+	excludesfile = /Users/cantecim/.gitignore_global
+	autocrlf = input
+	safecrlf = warn
+	editor = nano
+	eol = lf
+	filemode = false
+[user]
+	name = Can Tecim
+	email = can.tecim@gmail.com
+[alias]
+	co = checkout
+	c = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:'%H %ai | %s%d [%an]' --all --graph
+	histbr = log --pretty=format:'%H %ai | %s%d [%an]' --graph
+	type = cat-file -t
+	dump = cat-file -p
+	pp = !git pull --no-edit && git -c push.default=simple push
+	m = merge
+	currentbr = rev-parse --abbrev-ref HEAD
+	root = rev-parse --show-toplevel
+	resync = !git rm -r --cached . && git add . && git commit -m '.gitignore resync'
+[push]
+	default = current

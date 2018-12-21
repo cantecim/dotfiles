@@ -1,0 +1,72 @@
+#!/bin/bash
+function _psql_create_db() {
+	if [ $# != 2 ]; then
+		echo "Usage: psql-create-db {db name} {user name}"
+		return 1
+	fi
+	DB_NAME="$1"
+	USER_NAME="$2"
+
+	createuser -e -E -P $USER_NAME
+	createdb -e -O $USER_NAME $DB_NAME
+}
+alias "psql-create-db"="_psql_create_db"
+
+function _psql_drop_user_and_db() {
+	if [ $# != 1 ]; then
+		echo "Usage: _psql_drop_user_and_db {db and user name}"
+		return 1
+	fi
+	DB_NAME="$1"
+
+	dropdb -e $DB_NAME
+	dropuser -e $DB_NAME
+}
+alias "psql-drop-user-and-db"="_psql_drop_user_and_db"
+
+function _psql_create_db_from_dump() {
+	if [ $# != 3 ]; then
+		echo "Usage: _psql_create_db_from_dump {db name} {user name} {dump file}"
+		return 1
+	fi
+	DB_NAME="$1"
+	USER_NAME="$2"
+	DUMP_FILE="$3"
+
+	if [ ! -f "$DUMP_FILE" ]; then
+		echo "dump file not exists."
+		return 1
+	fi
+
+	psql --tuples-only --command "select * from pg_database where datname =
+'${DB_NAME}';" | cut -d \| -f1 | grep -qw "${DB_NAME}"
+
+	RESULT=$?
+	if [ $RESULT -eq 0 ]; then
+		echo "There is already a db ${DB_NAME} it will be dropped, continue? (yY/nN) [n] "
+		read -s -n 1 answer
+		[ -z "$answer" ] && answer="n"  # default choice
+	    case $answer in
+	        "y"|"Y" ) dropdb $DB_NAME;;
+	        "n"|"N"|* ) return 1;;
+	    esac
+	fi
+	_psql_create_db $DB_NAME $USER_NAME
+	psql -U ${USER_NAME} -d ${DB_NAME} -f "${DUMP_FILE}"
+}
+alias "psql-create-db-from-dump"="_psql_create_db_from_dump"
+
+function _psql_drop_connections() {
+	if [ -z "$1" ]; then
+			echo "usage> pgsql_drop_connections database"
+			return 1
+	fi
+
+	cat <<-EOF | psql -d $1
+			SELECT pg_terminate_backend(pg_stat_activity.pid)
+			FROM pg_stat_activity
+			WHERE pg_stat_activity.datname = '$1'
+			AND pid <> pg_backend_pid();
+	EOF
+}
+alias "psql-drop-connections"="_psql_drop_connections"
