@@ -44,3 +44,6 @@ for file in `ls ~/.bash_extra_*`; do
 	#echo $file;
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
+
+# the fuck
+eval $(thefuck --alias)
