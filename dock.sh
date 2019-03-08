@@ -19,6 +19,6 @@ dockutil --no-restart --add "/Applications/Postman.app"
 dockutil --no-restart --add "/Applications/Utilities/Terminal.app"
 dockutil --no-restart --add "/Applications/System Preferences.app"
 # dockutil --no-restart --add '~/Desktop' --view fan --display folder --allhomes
-dockutil --no-restart --add '~/Downloads' --view fan --display folder --allhomes
+dockutil --no-restart --add '~/Downloads' --view fan --display stack --allhomes
 
 killall Dock
