@@ -1,0 +1,6 @@
+#!/bin/bash
+# android sdk
+export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+export ANDROID_HOME=${ANDROID_SDK_ROOT}
+
+export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
