@@ -24,6 +24,8 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 alias countfolders='find ./* -maxdepth 0 -type d | wc -l'
 alias findtext='function _findtext(){ grep -rnw `pwd` -e "$1";};_findtext'
 
+alias ec2-fingerprint='ec2Fingerprint'
+
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
