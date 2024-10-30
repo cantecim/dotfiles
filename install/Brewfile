@@ -18,7 +18,7 @@ brew "mas"
 # fs/network
 brew "bat"
 brew "croc"
-brew "httpie"
+#brew "httpie" # brings http and https command line tools in, simple cURL alternatives, designed for APIs
 brew "ssh-copy-id"
 brew "tree"
 brew "unar"

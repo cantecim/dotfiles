@@ -7,7 +7,7 @@ alias cpwd="pwd|tr -d '\n'|pbcopy"
 alias gg="$VISUAL_GIT"
 
 alias chrome="open -a /Applications/Google\ Chrome.app"
-alias canary="open -a /Applications/Google\ Chrome\ Canary.app"
+#alias canary="open -a /Applications/Google\ Chrome\ Canary.app"
 alias firefox="open -a /Applications/Firefox.app"
 
 # Exclude macOS specific files in ZIP archives

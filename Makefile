@@ -3,7 +3,7 @@ OS := $(shell bin/is-supported bin/is-macos macos linux)
 HOMEBREW_PREFIX := $(shell bin/is-supported bin/is-macos $(shell bin/is-supported bin/is-arm64 /opt/homebrew /usr/local) /home/linuxbrew/.linuxbrew)
 export N_PREFIX = $(HOME)/.n
 PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(N_PREFIX)/bin:$(PATH)
-SHELL := env PATH=$(PATH) /bin/bash
+SHELL := env PATH=$(PATH) /bin/zsh
 SHELLS := /private/etc/shells
 BIN := $(HOMEBREW_PREFIX)/bin
 export XDG_CONFIG_HOME = $(HOME)/.config
@@ -18,7 +18,7 @@ macos: sudo core-macos packages link duti
 
 linux: core-linux link
 
-core-macos: brew bash git npm
+core-macos: omz brew bash git npm
 
 core-linux:
 	apt-get update
@@ -56,6 +56,9 @@ unlink: stow-$(OS)
 
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+
+omz:
+	is-executable omz || curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 bash: brew
 ifdef GITHUB_ACTION
