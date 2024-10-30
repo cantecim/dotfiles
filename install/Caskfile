@@ -1,10 +1,9 @@
-tap "homebrew/cask-fonts"
-
 cask "docker"
-cask "proton-drive"
-cask "firefox"
+#cask "proton-drive"
+#cask "firefox"
+cask "opera"
 cask "font-fira-code"
-cask "font-hack"
+# cask "font-hack" # TODO: validate this
 cask "google-chrome"
 #cask "google-chrome@canary"
 cask "hammerspoon"

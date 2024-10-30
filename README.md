@@ -6,6 +6,14 @@ These are my dotfiles. Take anything you want, but at your own risk.
 
 It mainly targets macOS systems (should install on e.g. Ubuntu as well for many tools, config and aliases etc).
 
+# TODOs
+- [ ] remove webpro
+- [ ] add mackup instructions from driesvints
+- [ ] check zsh completions if not working provide a solution
+- [ ] check system, all should be converted to zsh, remove unnecessary or missing things
+- [ ] copy oh-my-zsh custom settings from dotfiles-new
+- [ ] also install plugins
+
 ## Highlights
 
 - Minimal efforts to install everything, using a [Makefile](./Makefile)
