@@ -1,5 +1,7 @@
 # .files
 
+This project is based on [webpro's dotfiles](https://github.com/webpro/dotfiles) repository (thanks webpro!)
+
 These are my dotfiles. Take anything you want, but at your own risk.
 
 It mainly targets macOS systems (should install on e.g. Ubuntu as well for many tools, config and aliases etc).

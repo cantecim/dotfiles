@@ -1,6 +1,9 @@
 tap "homebrew/bundle"
 tap "lotyp/homebrew-formulae"
 
+# TODO: Check the installed packages see what they are, also delete unnecessary ones
+# TODO: make sure to delete any bootstrapping code for deleted packages
+# TODO: Compare with my old dotfiles bundle and see what we can add here
 # core/dotfiles
 brew "bats-core"
 brew "coreutils"
@@ -10,6 +13,7 @@ brew "nano"
 brew "stow"
 brew "thefuck"
 brew "topgrade"
+brew "mas"
 
 # fs/network
 brew "bat"

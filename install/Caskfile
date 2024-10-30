@@ -1,5 +1,8 @@
 tap "homebrew/cask-fonts"
 
+# TODO: Check the installed packages see what they are, also delete unnecessary ones
+# TODO: make sure to delete any bootstrapping code for deleted packages
+# TODO: Compare with my old dotfiles bundle and see what we can add here
 cask "docker"
 cask "proton-drive"
 cask "firefox"
