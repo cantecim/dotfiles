@@ -94,7 +94,7 @@ dot macos
 4. Populate this file with tokens (example: `export GITHUB_TOKEN=abc`):
 
 ```sh
-touch ~/.dotfiles/system/.exports
+nano ~/.dotfiles/system/.exports
 ```
 
 ## The `dot` command

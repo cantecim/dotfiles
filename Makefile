@@ -58,7 +58,7 @@ brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 
 omz:
-	is-executable omz || (curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh && echo "source $(HOME)/.zprofile" >> $(HOME)/.zshrc)
+	is-executable omz || curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 
 bash: brew
 ifdef GITHUB_ACTION
