@@ -13,6 +13,7 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - [ ] check system, all should be converted to zsh, remove unnecessary or missing things
 - [ ] copy oh-my-zsh custom settings from dotfiles-new
 - [ ] also install plugins
+- [ ] consider powerlevel10k
 
 ## Highlights
 

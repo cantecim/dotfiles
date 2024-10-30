@@ -1,6 +1,6 @@
 # Shortcuts
 
-alias reload="source ~/.zsh_profile"
+alias reload="source ~/.zshrc && source ~/.zsh_profile"
 alias _="sudo"
 alias g="git"
 alias rr="rm -rf"
