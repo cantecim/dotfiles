@@ -4,7 +4,7 @@ BIN_NAME=$(basename "$0")
 COMMAND_NAME=$1
 SUB_COMMAND_NAME=$2
 
-sub_help () {
+sub_help() {
   echo "Usage: $BIN_NAME <command>"
   echo
   echo "Commands:"
@@ -14,11 +14,12 @@ sub_help () {
   echo "   edit             Open dotfiles in IDE ($VISUAL) and Git GUI ($VISUAL_GIT)"
   echo "   help             This help message"
   echo "   macos            Apply macOS system defaults"
+  echo "   zsh              Install zsh extra stuff"
   echo "   test             Run tests"
   echo "   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)"
 }
 
-sub_clean () {
+sub_clean() {
   echo "$ brew cleanup"
   brew cleanup
   echo "$ cargo cache --autoclean"
@@ -29,45 +30,58 @@ sub_clean () {
   pip cache purge
 }
 
-sub_dock () {
+sub_dock() {
   . "${DOTFILES_DIR}/macos/dock.sh" && echo "Dock reloaded."
 }
 
-sub_edit () {
+sub_edit() {
   sh -c "$VISUAL $DOTFILES_DIR"
   sh -c "$VISUAL_GIT $DOTFILES_DIR"
 }
 
-sub_test () {
+sub_test() {
   bats "$DOTFILES_DIR"/test/*.bats
 }
 
-sub_update () {
+sub_update() {
   topgrade
 }
 
-sub_duti () {
+sub_duti() {
   duti -v "${DOTFILES_DIR}/install/duti"
 }
 
-sub_macos () {
+sub_macos() {
   for DEFAULTS_FILE in "${DOTFILES_DIR}"/macos/defaults*.sh; do
     echo "Applying ${DEFAULTS_FILE}" && . "${DEFAULTS_FILE}"
   done
   echo "Done. Some changes may require a logout/restart to take effect."
 }
 
+sub_zsh() {
+  echo "Installing zsh plugins..."
+
+  # Install zsh-syntax-highlighting
+  if [[ ! -d "$ZSH/plugins/zsh-autosuggestions" ]]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH/plugins/zsh-autosuggestions"
+  else
+    echo "zsh-autosuggestions already installed."
+  fi
+
+  [[ $? ]] && echo "Done"
+}
+
 case $COMMAND_NAME in
-  "" | "-h" | "--help")
+"" | "-h" | "--help")
+  sub_help
+  ;;
+*)
+  shift
+  sub_${COMMAND_NAME} $@
+  if [ $? = 127 ]; then
+    echo "'$COMMAND_NAME' is not a known command or has errors." >&2
     sub_help
-    ;;
-  *)
-    shift
-    sub_${COMMAND_NAME} $@
-    if [ $? = 127 ]; then
-      echo "'$COMMAND_NAME' is not a known command or has errors." >&2
-      sub_help
-      exit 1
-    fi
-    ;;
+    exit 1
+  fi
+  ;;
 esac

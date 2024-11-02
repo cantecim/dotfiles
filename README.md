@@ -6,8 +6,9 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 
 # TODOs
 - [ ] Monitor git diff and git merge tool behaviors adjust gitconfig if needed
-- [ ] Check if ps0 and related function can be removed without any break
+- [x] Check if ps0 and related function can be removed without any break
 - [x] add mackup instructions from driesvints
+- [ ] add cheat from codfish/dotfiles
 - [ ] check zsh completions if not working provide a solution
 - [ ] check system, all should be converted to zsh, remove unnecessary or missing things
 - [ ] copy oh-my-zsh custom settings from dotfiles-new
@@ -18,9 +19,10 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 ## Highlights
 
 - Minimal efforts to install everything, using a [Makefile](./Makefile)
-- Mostly based around Homebrew, Caskroom and Node.js, latest Bash + GNU Utils
+- Mostly based around Homebrew, Caskroom and Node.js, zsh + latest GNU Utils
+- Oh my Zsh included
 - Great [Window management](./config/hammerspoon/README.md) (using Hammerspoon)
-- Fast and colored prompt
+- Fast and beautiful theme
 - Updated macOS defaults
 - Well-organized and easy to customize
 - The installation and runcom setup is
@@ -109,6 +111,7 @@ mackup restore
 See [this section](#using-mackup) for more info
 
 ## Using `mackup`
+
 You can use mackup to backup and restore your application settings with ease.
 
 If you don't have any backup yet, after installing these dotfiles for the first time, you might want to run `mackup backup`
@@ -130,7 +133,7 @@ Mackup is configured to use iCloud as storage engine, this means it will backup 
 
 ### WARNING
 > ⚠️ before switching to another device, make sure you backup your data!
- 
+
 ### Backup your data
 
 If you're migrating from an existing Mac, you should first make sure to backup all of your existing data. Go through the checklist below to make sure you didn't forget anything before you migrate.
@@ -143,7 +146,7 @@ If you're migrating from an existing Mac, you should first make sure to backup a
 
 ## The `dot` command
 
-```
+```sh
 $ dot help
 Usage: dot <command>
 
@@ -153,9 +156,15 @@ Commands:
    edit             Open dotfiles in IDE ($VISUAL) and Git GUI ($VISUAL_GIT)
    help             This help message
    macos            Apply macOS system defaults
+   zsh              Install zsh extra stuff
    test             Run tests
    update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)
 ```
+
+### What is included in `dot zsh`?
+Install extra zsh plugins
+
+- zsh-syntax-highlighting
 
 ## Customize
 
@@ -163,7 +172,7 @@ To customize the dotfiles to your likings, fork it and [be the king of your cast
 
 ## Credits
 
-* This project is based on [webpro's dotfiles](https://github.com/webpro/dotfiles) repository (thanks webpro!)
-* Inspired from driesvints/dotfiles esp. on mackup
-* Also inspired from codfish/dotfiles for oh-my-zsh-custom configs
-* And many thanks to the [dotfiles community](https://dotfiles.github.io).
+- This project is based on [webpro's dotfiles](https://github.com/webpro/dotfiles) repository (thanks webpro!)
+- Inspired from driesvints/dotfiles esp. on mackup
+- Also inspired from codfish/dotfiles esp. on zsh-autosuggestions plugin
+- And many thanks to the [dotfiles community](https://dotfiles.github.io).
