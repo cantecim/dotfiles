@@ -1,13 +1,13 @@
 [user]
-	name = Lars Kappert
-	email = lars@webpro.nl
+	name = Can Tecim
+	email = can.tecim@gmail.com
 
 [github]
-	user = webpro
+	user = cantecim
 
 [core]
 	excludesfile = ~/.config/git/ignore
-	editor = code --wait
+	editor = nano
 	filemode = false
 	trustctime = false
 	autocrlf = input
@@ -16,7 +16,7 @@
 	ignorecase = false
 
 [credential]
-	helper = osxkeychain
+	helper = 
 
 [pull]
 	rebase = true
@@ -68,7 +68,7 @@
 	fc = "log --max-parents=0 --pretty=format:'%ad' --date=format:'%Y-%m-%d' -n 1"
 
 [diff]
-	renames = copies
+	renames = true
 	indentHeuristic = true
 	colorMoved = default
 
@@ -80,7 +80,7 @@
 	path =
 
 [merge]
-	conflictstyle = diff3
+	conflictstyle = merge
 	defaultToUpstream = true
 
 [mergetool]
