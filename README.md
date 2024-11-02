@@ -1,14 +1,13 @@
 # .files
 
-This project is based on [webpro's dotfiles](https://github.com/webpro/dotfiles) repository (thanks webpro!)
-
 These are my dotfiles. Take anything you want, but at your own risk.
 
 It mainly targets macOS systems (should install on e.g. Ubuntu as well for many tools, config and aliases etc).
 
 # TODOs
-- [ ] remove webpro
-- [ ] add mackup instructions from driesvints
+- [ ] Monitor git diff and git merge tool behaviors adjust gitconfig if needed
+- [ ] Check if ps0 and related function can be removed without any break
+- [x] add mackup instructions from driesvints
 - [ ] check zsh completions if not working provide a solution
 - [ ] check system, all should be converted to zsh, remove unnecessary or missing things
 - [ ] copy oh-my-zsh custom settings from dotfiles-new
@@ -24,7 +23,7 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - Updated macOS defaults
 - Well-organized and easy to customize
 - The installation and runcom setup is
-  [tested weekly on real Ubuntu and macOS machines](https://github.com/webpro/dotfiles/actions)
+  [tested weekly on real Ubuntu and macOS machines](https://github.com/cantecim/dotfiles/actions)
   (Monterey/12 and Ventura/13) using [a GitHub Action](./.github/workflows/dotfiles-installation.yml)
 - Supports both Apple Silicon (M1) and Intel chips
 
@@ -51,7 +50,7 @@ The Xcode Command Line Tools includes `git` and `make` (not available on stock m
 1. Install this repo with `curl` available:
 
 ```bash
-bash -c "`curl -fsSL https://raw.githubusercontent.com/webpro/dotfiles/master/remote-install.sh`"
+bash -c "`curl -fsSL https://raw.githubusercontent.com/cantecim/dotfiles/master/remote-install.sh`"
 ```
 
 This will clone or download this repo to `~/.dotfiles` (depending on the availability of `git`, `curl` or `wget`).
@@ -59,7 +58,7 @@ This will clone or download this repo to `~/.dotfiles` (depending on the availab
 1. Alternatively, clone manually into the desired location:
 
 ```bash
-git clone https://github.com/webpro/dotfiles.git ~/.dotfiles
+git clone https://github.com/cantecim/dotfiles.git ~/.dotfiles
 ```
 
 2. Use the [Makefile](./Makefile) to install the [packages listed above](#packages-overview), and symlink
@@ -71,11 +70,13 @@ make
 ```
 
 Running `make` with the Makefile is idempotent. The installation process in the Makefile is tested on every push and every week in this
-[GitHub Action](https://github.com/webpro/dotfiles/actions). Please file an issue in this repo if there are errors.
+[GitHub Action](https://github.com/cantecim/dotfiles/actions). Please file an issue in this repo if there are errors.
 
 ## Post-Installation
 
 1. Set your Git credentials:
+
+   It is configured for me by default
 
 ```sh
 git config --global user.name "your name"
@@ -97,6 +98,47 @@ dot macos
 ```sh
 nano ~/.dotfiles/system/.exports
 ```
+
+5. Restore your application configurations
+
+```sh
+mackup restore
+```
+
+See [this section](#using-mackup) for more info
+
+## Using `mackup`
+You can use mackup to backup and restore your application settings with ease.
+
+If you don't have any backup yet, after installing these dotfiles for the first time, you might want to run `mackup backup`
+
+Or, if you'd like to backup from another mac, you can login to your iCloud account and run
+
+```sh
+echo "[storage]" >> .mackup.cfg
+echo "engine = icloud" >> .mackup.cfg
+echo "" >> .mackup.cfg
+echo "[applications_to_ignore]" >> .mackup.cfg
+echo "zsh" >> .mackup.cfg
+brew install mackup
+mackup backup
+```
+
+### Default settings
+Mackup is configured to use iCloud as storage engine, this means it will backup to and restore from there.
+
+### WARNING
+> ⚠️ before switching to another device, make sure you backup your data!
+ 
+### Backup your data
+
+If you're migrating from an existing Mac, you should first make sure to backup all of your existing data. Go through the checklist below to make sure you didn't forget anything before you migrate.
+
+- Did you commit and push any changes/branches to your git repositories?
+- Did you remember to save all important documents from non-iCloud directories?
+- Did you save all of your work from apps which aren't synced through iCloud?
+- Did you remember to export important data from your local database?
+- Did you update [mackup](https://github.com/lra/mackup) to the latest version and ran `mackup backup`?
 
 ## The `dot` command
 
@@ -120,4 +162,7 @@ To customize the dotfiles to your likings, fork it and [be the king of your cast
 
 ## Credits
 
-Many thanks to the [dotfiles community](https://dotfiles.github.io).
+* This project is based on [webpro's dotfiles](https://github.com/webpro/dotfiles) repository (thanks webpro!)
+* Inspired from driesvints/dotfiles esp. on mackup
+* Also inspired from codfish/dotfiles for oh-my-zsh-custom configs
+* And many thanks to the [dotfiles community](https://dotfiles.github.io).
