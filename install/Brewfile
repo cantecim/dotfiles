@@ -14,6 +14,7 @@ brew "stow"
 brew "thefuck"
 brew "topgrade"
 #brew "mas"
+#brew "mackup"
 
 # fs/network
 brew "bat"
