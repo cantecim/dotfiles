@@ -13,6 +13,7 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - [ ] copy oh-my-zsh custom settings from dotfiles-new
 - [ ] also install plugins
 - [ ] consider powerlevel10k
+- [ ] consider https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/nodenv requires customization to omz theme
 
 ## Highlights
 

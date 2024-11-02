@@ -1,0 +1,6 @@
+# commit with message
+
+commitWithMessage() {
+	message="$*"
+	git commit -m "$message"
+}
