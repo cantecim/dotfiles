@@ -9,11 +9,6 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - [x] Check if ps0 and related function can be removed without any break
 - [x] add mackup instructions from driesvints
 - [ ] add cheat from codfish/dotfiles
-- [ ] check zsh completions if not working provide a solution
-- [ ] check system, all should be converted to zsh, remove unnecessary or missing things
-- [ ] copy oh-my-zsh custom settings from dotfiles-new
-- [ ] also install plugins
-- [ ] consider powerlevel10k
 - [ ] consider https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/nodenv requires customization to omz theme
 
 ## Highlights
