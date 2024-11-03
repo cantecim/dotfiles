@@ -39,7 +39,7 @@ jobs:
           fi
 
       - name: Load & verify runcom setup
-        run: source $HOME/.bash_profile
+        run: reload
 
       - name: Run tests
         if: startsWith(matrix.os, 'macos')
