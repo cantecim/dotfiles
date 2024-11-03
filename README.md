@@ -57,7 +57,7 @@ This will clone or download this repo to `~/.dotfiles` (depending on the availab
    - add it into your [GitHub Account's SSH keys](https://github.com/settings/keys)
 
 ```bash
-git clone https://github.com/cantecim/dotfiles.git ~/.dotfiles
+git clone git@github.com:cantecim/dotfiles.git ~/.dotfiles
 ```
 
 1. Use the [Makefile](./Makefile) to install the [packages listed above](#packages-overview), and symlink
