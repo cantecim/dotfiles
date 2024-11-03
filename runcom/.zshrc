@@ -70,7 +70,7 @@ ZSH_THEME="norm"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aliases alias-finder zoxide node zsh-autosuggestions)
+plugins=(aliases alias-finder zoxide node zsh-autosuggestions)
 
 # PLUGIN: alias-finder related configurations
 zstyle ':omz:plugins:alias-finder' autoload yes # disabled by default
