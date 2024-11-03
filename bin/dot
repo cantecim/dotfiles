@@ -61,7 +61,7 @@ sub_macos() {
 sub_zsh() {
   echo "Installing zsh plugins..."
 
-  # Install zsh-syntax-highlighting
+  # Install zsh-autosuggestions
   if [[ ! -d "$ZSH/plugins/zsh-autosuggestions" ]]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH/plugins/zsh-autosuggestions"
   else

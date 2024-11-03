@@ -59,12 +59,14 @@ bash -c "`curl -fsSL https://raw.githubusercontent.com/cantecim/dotfiles/master/
 This will clone or download this repo to `~/.dotfiles` (depending on the availability of `git`, `curl` or `wget`).
 
 1. Alternatively, clone manually into the desired location:
+   - first [create your ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) "ssh-keygen -t rsa -b 4096 -C "your_email@example.com""
+   - add it into your [GitHub Account's SSH keys](https://github.com/settings/keys)
 
 ```bash
 git clone https://github.com/cantecim/dotfiles.git ~/.dotfiles
 ```
 
-2. Use the [Makefile](./Makefile) to install the [packages listed above](#packages-overview), and symlink
+1. Use the [Makefile](./Makefile) to install the [packages listed above](#packages-overview), and symlink
    [runcom](./runcom) and [config](./config) files (using [stow](https://www.gnu.org/software/stow/)):
 
 ```bash
@@ -87,16 +89,17 @@ git config --global user.email "your@email.com"
 git config --global github.user "your-github-username"
 ```
 
-2. Set macOS [Dock items](./macos/dock.sh) and [system defaults](./macos/defaults.sh):
+2. Install zsh extra features, set macOS [Dock items](./macos/dock.sh) and [system defaults](./macos/defaults.sh):
 
 ```sh
+dot zsh
 dot dock
 dot macos
 ```
 
-3. Start Hammerspoon once and set "Launch Hammerspoon at login".
+1. Start Hammerspoon once and set "Launch Hammerspoon at login".
 
-4. Populate this file with tokens (example: `export GITHUB_TOKEN=abc`):
+2. Populate this file with tokens (example: `export GITHUB_TOKEN=abc`):
 
 ```sh
 nano ~/.dotfiles/system/.exports

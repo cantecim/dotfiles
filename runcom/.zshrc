@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.dotfiles/oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -70,7 +70,7 @@ ZSH_THEME="norm"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aliases alias-finder zoxide node zsh-syntax-highlighting)
+plugins=(git aliases alias-finder zoxide node zsh-autosuggestions)
 
 # PLUGIN: alias-finder related configurations
 zstyle ':omz:plugins:alias-finder' autoload yes # disabled by default
