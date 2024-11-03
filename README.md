@@ -6,8 +6,7 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 
 # TODOs
 - [ ] Monitor git diff and git merge tool behaviors adjust gitconfig if needed
-- [x] Check if ps0 and related function can be removed without any break
-- [x] add mackup instructions from driesvints
+- [ ] change dock icons
 - [ ] add cheat from codfish/dotfiles
 - [ ] consider https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/nodenv requires customization to omz theme
 
