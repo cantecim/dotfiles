@@ -39,7 +39,7 @@ jobs:
           fi
 
       - name: Load & verify runcom setup
-        run: reload
+        run: source ~/.zshrc && source ~/.zprofile
 
       - name: Run tests
         if: startsWith(matrix.os, 'macos')
