@@ -1,3 +1,4 @@
+cask "avast-security"
 cask "bitwarden"
 cask "docker"
 #cask "proton-drive"
