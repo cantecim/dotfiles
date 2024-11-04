@@ -73,7 +73,15 @@ Running `make` with the Makefile is idempotent. The installation process in the 
 
 ## Post-Installation
 
-1. Set your Git credentials:
+1. Install Avast Security
+
+   You can skip this step if you'd like to.
+
+```sh
+open "`brew list --cask -v avast-security | grep Security.pkg`"
+```
+
+2. Set your Git credentials:
 
    It is configured for me by default
 
@@ -83,7 +91,7 @@ git config --global user.email "your@email.com"
 git config --global github.user "your-github-username"
 ```
 
-2. Install zsh extra features, set macOS [Dock items](./macos/dock.sh) and [system defaults](./macos/defaults.sh):
+3. Install zsh extra features, set macOS [Dock items](./macos/dock.sh) and [system defaults](./macos/defaults.sh):
 
 ```sh
 dot zsh
@@ -91,15 +99,15 @@ dot dock
 dot macos
 ```
 
-1. Start Hammerspoon once and set "Launch Hammerspoon at login".
+4. Start Hammerspoon once and set "Launch Hammerspoon at login".
 
-2. Populate this file with tokens (example: `export GITHUB_TOKEN=abc`):
+5. Populate this file with tokens (example: `export GITHUB_TOKEN=abc`):
 
 ```sh
 nano ~/.dotfiles/system/.exports
 ```
 
-5. Restore your application configurations
+6. Restore your application configurations
 
 ```sh
 mackup restore
