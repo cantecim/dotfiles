@@ -39,3 +39,8 @@ eval "$(dircolors -b "$DOTFILES_DIR"/system/.dir_colors)"
 
 unset CURRENT_SCRIPT SCRIPT_PATH DOTFILE
 export DOTFILES_DIR
+
+# autoenv
+export AUTOENV_ENV_FILENAME=.auto.env
+source /opt/homebrew/opt/autoenv/activate.sh
+# autoenv end
