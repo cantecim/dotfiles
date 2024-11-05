@@ -13,7 +13,7 @@ brew "nano"
 brew "stow"
 brew "thefuck"
 brew "topgrade"
-#brew "mas"
+brew "mas"
 brew "mackup"
 
 # fs/network
