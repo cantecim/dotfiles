@@ -45,6 +45,7 @@ brew "ruby"
 brew "rust"
 brew "shellcheck"
 brew "autoenv"
+brew "libpq"
 
 # media
 brew "ffmpeg"
