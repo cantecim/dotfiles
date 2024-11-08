@@ -19,8 +19,10 @@ fi
 
 if [ -z "$CMD" ]; then
   echo "No git, curl or wget available. Aborting."
-else
+elif [ ! -d "$TARGET" ]; then
   echo "Installing dotfiles..."
   mkdir -p "$TARGET"
   eval "$CMD"
+else
+  echo "Previous dotfiles installation detected, remove ${TARGET} folder before running this script"
 fi
