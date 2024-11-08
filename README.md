@@ -95,6 +95,7 @@ git config --global github.user "your-github-username"
 
 ```sh
 dot zsh
+dot mas
 dot dock
 dot macos
 ```
@@ -162,6 +163,7 @@ Commands:
    help             This help message
    macos            Apply macOS system defaults
    zsh              Install zsh extra stuff
+   mas              Install macOS apps from App Store using mas CLI
    test             Run tests
    update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)
 ```
@@ -170,6 +172,12 @@ Commands:
 Install extra zsh plugins
 
 - zsh-syntax-highlighting
+
+### What is included in `dot mas`?
+Install macOS apps defined in `install/Masfile` using mas CLI
+
+- Microsoft To Do
+- etc.
 
 ## Customize
 

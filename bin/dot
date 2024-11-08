@@ -15,6 +15,7 @@ sub_help() {
   echo "   help             This help message"
   echo "   macos            Apply macOS system defaults"
   echo "   zsh              Install zsh extra stuff"
+  echo "   mas              Install macOS apps from App Store using mas CLI"
   echo "   test             Run tests"
   echo "   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)"
 }
@@ -67,6 +68,14 @@ sub_zsh() {
   else
     echo "zsh-autosuggestions already installed."
   fi
+
+  [[ $? ]] && echo "Done"
+}
+
+sub_mas() {
+  echo "Installing macOS apps..."
+
+  brew bundle --file=$(DOTFILES_DIR)/install/Masfile
 
   [[ $? ]] && echo "Done"
 }
