@@ -37,6 +37,9 @@ brew "psgrep"
 brew "ripgrep"
 brew "the_silver_searcher"
 
+# security/crypto
+brew "gpg"
+
 # languages/tools
 brew "gh"
 brew "n"
