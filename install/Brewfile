@@ -39,6 +39,7 @@ brew "the_silver_searcher"
 
 # security/crypto
 brew "gpg"
+brew "git-crypt"
 
 # languages/tools
 brew "gh"
