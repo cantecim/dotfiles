@@ -1,6 +1,7 @@
 cask "avast-security"
 cask "bitwarden"
 cask "docker"
+cask "openlens"
 #cask "proton-drive"
 #cask "firefox"
 cask "opera"
