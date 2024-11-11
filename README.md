@@ -53,7 +53,7 @@ curl -fsSL https://raw.githubusercontent.com/cantecim/dotfiles/main/remote-insta
 This will clone or download this repo to `~/.dotfiles` (depending on the availability of `git`, `curl` or `wget`).
 
 1. Alternatively, clone manually into the desired location:
-   - first [create your ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) "ssh-keygen -t rsa -b 4096 -C "your_email@example.com""
+   - first [create your ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) "ssh-keygen -t ed25519 -C "your_email@example.com""
    - add it into your [GitHub Account's SSH keys](https://github.com/settings/keys)
 
 ```bash
