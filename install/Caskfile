@@ -9,6 +9,7 @@ cask "google-chrome"
 cask "google-cloud-sdk"
 cask "hammerspoon"
 cask "keepingyouawake"
+cask "kobo"
 cask "maccy"
 # cask "microsoft-teams"
 cask "notion"
@@ -32,5 +33,3 @@ cask "whatsapp"
 # cask "font-hack" # TODO: validate this
 # cask "google-chrome@canary"
 # cask "sourcetree"
-
-
