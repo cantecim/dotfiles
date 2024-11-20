@@ -22,6 +22,7 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - The installation and runcom setup is
   [tested weekly on real Ubuntu and macOS machines](https://github.com/cantecim/dotfiles/actions)
   (Monterey/12 and Ventura/13) using [a GitHub Action](./.github/workflows/dotfiles-installation.yml)
+- Installs spoofdpi with homebrew, you can use with `unblock` alias (A local proxy server to bypass DPI procedures of your ISP)
 - Supports both Apple Silicon (M1) and Intel chips
 
 ## Packages Overview
