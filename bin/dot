@@ -16,6 +16,7 @@ sub_help() {
   echo "   macos            Apply macOS system defaults"
   echo "   zsh              Install zsh extra stuff"
   echo "   mas              Install macOS apps from App Store using mas CLI"
+  echo "   logioptions      Install Logi Options+ app for Logitech devices"
   echo "   test             Run tests"
   echo "   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)"
 }
@@ -76,6 +77,14 @@ sub_mas() {
   echo "Installing macOS apps..."
 
   brew bundle --file=$(DOTFILES_DIR)/install/Masfile
+
+  [[ $? ]] && echo "Done"
+}
+
+sub_logioptions() {
+  echo "Installing Logi Options+..."
+
+  brew install --cask logi-options+
 
   [[ $? ]] && echo "Done"
 }

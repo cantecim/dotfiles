@@ -165,6 +165,7 @@ Commands:
    macos            Apply macOS system defaults
    zsh              Install zsh extra stuff
    mas              Install macOS apps from App Store using mas CLI
+   logioptions      Install Logi Options+ app for Logitech devices
    test             Run tests
    update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)
 ```
