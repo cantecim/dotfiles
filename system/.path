@@ -25,10 +25,11 @@ prepend-path "$HOMEBREW_PREFIX/opt/python/libexec/bin"
 prepend-path "$HOMEBREW_PREFIX/opt/ruby/bin"
 prepend-path "$HOMEBREW_PREFIX/opt/libpq/bin"
 prepend-path "$DOTFILES_DIR/bin"
-prepend-path "$HOME/.bun/bin"
+prepend-path "$HOME/.bun/bin"                                           # Bun
 prepend-path "$HOME/.cargo/bin"
-prepend-path "$HOME/.deno/bin"
+prepend-path "$HOME/.deno/bin"                                          # Deno
 prepend-path "$HOME/.local/share/pnpm"
+prepend-path "$HOME/.rd/bin"                                            # Rancher Desktop
 prepend-path "$N_PREFIX/bin"
 
 # Remove duplicates (preserving prepended items)
