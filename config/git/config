@@ -80,22 +80,24 @@
 	renames = true
 	indentHeuristic = true
 	colorMoved = default
+	tool = vscode
 
 [difftool]
 	prompt = false
 
-[difftool "sourcetree"]
+[difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 	path =
 
 [merge]
 	conflictstyle = merge
 	defaultToUpstream = true
+	tool = vscode
 
 [mergetool]
 	prompt = false
 
-[mergetool "sourcetree"]
+[mergetool "vscode"]
 	cmd = code --wait $MERGED
 	trustExitCode = true
 
