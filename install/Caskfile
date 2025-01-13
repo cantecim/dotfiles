@@ -28,6 +28,7 @@ cask "visual-studio-code"
 cask "vlc"
 cask "webstorm"
 cask "whatsapp"
+cask "tor-browser"
 
 # cask "proton-drive"
 # cask "firefox"
