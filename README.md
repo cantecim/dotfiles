@@ -23,6 +23,7 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
   [tested weekly on real Ubuntu and macOS machines](https://github.com/cantecim/dotfiles/actions)
   (Monterey/12 and Ventura/13) using [a GitHub Action](./.github/workflows/dotfiles-installation.yml)
 - Installs spoofdpi with homebrew, you can use with `unblock` alias (A local proxy server to bypass DPI procedures of your ISP)
+- Incognito mode for zsh [thanks to Stephan Sokolow](https://blog.ssokolow.com/archives/2020/09/08/incognito-mode-for-zsh/)
 - Supports both Apple Silicon (M1) and Intel chips
 
 ## Packages Overview
@@ -180,6 +181,12 @@ Install macOS apps defined in `install/Masfile` using mas CLI
 
 - Microsoft To Do
 - etc.
+
+## How to use incognito mode
+Type `anonsh` to go incognito in your current shell, but beware that you still need to run clean up commands before exiting
+
+- Use `clear` to clear both the screen and scrollback buffer
+- Use `fc -p` to clear command history without affecting your usual HISTFILE
 
 ## Customize
 

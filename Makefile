@@ -7,6 +7,7 @@ SHELL := env PATH=$(PATH) /bin/zsh
 SHELLS := /private/etc/shells
 BIN := $(HOMEBREW_PREFIX)/bin
 export XDG_CONFIG_HOME = $(HOME)/.config
+export ZSH_HOME = $(HOME)/.zsh
 export STOW_DIR = $(DOTFILES_DIR)
 export ACCEPT_EULA=Y
 
@@ -44,6 +45,7 @@ link: stow-$(OS)
 		mv -v $(HOME)/$$FILE{,.bak}; fi; done
 	mkdir -p "$(XDG_CONFIG_HOME)"
 	stow -t "$(HOME)" runcom
+	stow -t "$(ZSH_HOME)" zsh
 	stow -t "$(XDG_CONFIG_HOME)" config
 	mkdir -p $(HOME)/.local/runtime
 	chmod 700 $(HOME)/.local/runtime
