@@ -43,12 +43,13 @@ packages: brew-packages cask-apps node-packages rust-packages
 link: stow-$(OS)
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then \
 		mv -v $(HOME)/$$FILE{,.bak}; fi; done
+	mkdir -p "$(ZSH_HOME)"
 	mkdir -p "$(XDG_CONFIG_HOME)"
-	stow -t "$(HOME)" runcom
-	stow -t "$(ZSH_HOME)" zsh
+	stow --no-folding -t "$(ZSH_HOME)" zsh
 	stow -t "$(XDG_CONFIG_HOME)" config
 	mkdir -p $(HOME)/.local/runtime
 	chmod 700 $(HOME)/.local/runtime
+	stow -t "$(HOME)" runcom
 
 unlink: stow-$(OS)
 	stow --delete -t "$(HOME)" runcom
