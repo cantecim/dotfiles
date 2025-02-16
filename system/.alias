@@ -80,8 +80,8 @@ alias speedtest="wget -O /dev/null http://speed.transip.nl/100mb.bin"
 alias grip="grip --browser --pass=$GITHUB_TOKEN"
 alias countfolders='find ./* -maxdepth 0 -type d | wc -l'
 alias findtext='function _findtext(){ grep -rnw `pwd` -e "$1";};_findtext'
-alias unblock='screen -S unblock -d -m spoofdpi -enable-doh -silent -window-size 3 &> /dev/null'
-alias unblock-discord='screen -S unblock -d -m spoofdpi -enable-doh -silent -window-size 3 -pattern ".*discord\.com.*" -pattern ".*discord\.gg.*" -pattern ".*discordapp\.com.*" &> /dev/null'
+alias unblock='screen -S unblock -d -m spoofdpi -addr 0.0.0.0 -enable-doh -silent -window-size 3 &> /dev/null'
+alias unblock-discord='screen -S unblock -d -m spoofdpi -addr 0.0.0.0 -enable-doh -silent -window-size 3 -pattern ".*discord\.com.*" -pattern ".*discord\.gg.*" -pattern ".*discordapp\.com.*" &> /dev/null'
 alias unblock-show='screen -x unblock'
 alias unblock-hide='screen -d unblock'
 alias unblock-quit='screen -SX unblock at "#" stuff '^C' && screen -SX unblock quit; killall spoofdpi'
