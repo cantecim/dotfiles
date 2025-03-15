@@ -1,6 +1,7 @@
 cask "avast-security"
 cask "bitwarden"
 cask "chatgpt"
+cask "claude"
 cask "dbeaver-community"
 cask "discord"
 cask "docker"
