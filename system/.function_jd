@@ -1,0 +1,43 @@
+# jd rename JD ID
+
+jd_rename() {
+    # Check if the correct number of arguments is given
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: jd_rename <target_id> <new_id>"
+        echo "Recursively renames files and directories by replacing occurrences of <target_id> with <new_id>."
+        echo "Use it to change JD.ID easily."
+        echo
+        echo "Example:"
+        echo "  jd_rename 42.11 42.12   # Renames all files and folders containing 42.11 to 42.12"
+        return 1
+    fi
+
+    TARGETID="$1"
+    NEWID="$2"
+
+    # Rename files (only modify the filename part)
+    find . -type f -name "*${TARGETID}*" | while read -r file; do
+        dirpath=$(dirname "$file")       # Extract folder path
+        filename=$(basename "$file")     # Extract filename
+        newfilename=$(echo "$filename" | sed "s/${TARGETID}/${NEWID}/g") # Replace in filename only
+        newfile="${dirpath}/${newfilename}"
+
+        if [[ "$file" != "$newfile" ]]; then
+            echo "Renaming file: $file → $newfile"
+            mv "$file" "$newfile"
+        fi
+    done
+
+    # Rename directories (only modify the last folder name, keeping full path intact)
+    find . -depth -type d -name "*${TARGETID}*" | while read -r dir; do
+        parentpath=$(dirname "$dir")     # Extract parent directory path
+        dirnameonly=$(basename "$dir")   # Extract just the directory name
+        newdirname=$(echo "$dirnameonly" | sed "s/${TARGETID}/${NEWID}/g") # Replace in directory name only
+        newdir="${parentpath}/${newdirname}"
+
+        if [[ "$dir" != "$newdir" ]]; then
+            echo "Renaming directory: $dir → $newdir"
+            mv "$dir" "$newdir"
+        fi
+    done
+}

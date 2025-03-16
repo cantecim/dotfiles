@@ -25,6 +25,8 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - Installs spoofdpi with homebrew, you can use with `unblock` alias (A local proxy server to bypass DPI procedures of your ISP)
 - Incognito mode for zsh [thanks to Stephan Sokolow](https://blog.ssokolow.com/archives/2020/09/08/incognito-mode-for-zsh/)
 - Supports both Apple Silicon (M1) and Intel chips
+- **NEW**: Johnny.Decimal supports
+  - jd_* prefixed functions to help your JD file system
 
 ## Packages Overview
 
@@ -181,6 +183,12 @@ Install macOS apps defined in `install/Masfile` using mas CLI
 
 - Microsoft To Do
 - etc.
+
+## The JD utilities
+### jd_rename <target_id> <new_id>
+If you would like to rename/shift/move your IDs use this function
+
+### more TBImplemented
 
 ## How to use incognito mode
 Type `anonsh` to go incognito in your current shell, but beware that you still need to run clean up commands before exiting
