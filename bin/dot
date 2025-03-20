@@ -17,6 +17,8 @@ sub_help() {
   echo "   zsh              Install zsh extra stuff"
   echo "   mas              Install macOS apps from App Store using mas CLI"
   echo "   logioptions      Install Logi Options+ app for Logitech devices"
+  echo "   startuphook      Inject startup hook daemon"
+  echo "   rm-startuphook   Remove startup hook daemon"
   echo "   test             Run tests"
   echo "   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)"
 }
@@ -86,6 +88,26 @@ sub_logioptions() {
 
   brew install --cask logi-options+
 
+  [[ $? ]] && echo "Done"
+}
+
+sub_startuphook() {
+  echo "Injecting startup hook daemon using launchctl..."
+
+  cp "${DOTFILES_DIR}/daemon/com.cantecim.startuphook.plist" ~/Library/LaunchAgents/com.cantecim.startuphook.plist &&
+  sed -i'' "s|\\$\\$\\\$DOTFILES_DIR\\$\\$\\$|$(printf '%s\n' "$DOTFILES_DIR" | sed 's/[\/&]/\\&/g')|g" ~/Library/LaunchAgents/com.cantecim.startuphook.plist &&
+  launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist &> /dev/null ;
+  launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist
+
+  [[ $? ]] && echo "Done"
+}
+
+sub_rm-startuphook() {
+  echo "Removing startup daemon..."
+
+  launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist &> /dev/null ;
+  [[ -f "${DOTFILES_DIR}/daemon/startuphook.log" ]] && rm "${DOTFILES_DIR}/daemon/startuphook.log"
+  
   [[ $? ]] && echo "Done"
 }
 

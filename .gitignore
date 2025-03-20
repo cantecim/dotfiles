@@ -2,3 +2,5 @@
 *.lock.json
 __pycache__
 .history
+
+daemon/startuphook.log

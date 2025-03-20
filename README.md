@@ -169,6 +169,8 @@ Commands:
    zsh              Install zsh extra stuff
    mas              Install macOS apps from App Store using mas CLI
    logioptions      Install Logi Options+ app for Logitech devices
+   startuphook      Inject startup hook daemon
+   rm-startuphook   Remove startup hook daemon
    test             Run tests
    update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)
 ```
@@ -183,6 +185,14 @@ Install macOS apps defined in `install/Masfile` using mas CLI
 
 - Microsoft To Do
 - etc.
+
+### What does `startup hook` daemon injection do?
+It registers the startup daemon as launch agent using launchctl, startup daemon basically runs the script `daemon/startuphook.sh` (see [plist file](daemon/com.cantecim.startuphook.plist))
+
+##### What startuphook.sh do then?
+When it started (so when computer run) it executes `unblock-discord` command, and when shutting-down executes `unblock-quit`
+
+Basically, runs unblocker automatically to use discord without any break
 
 ## The JD utilities
 ### jd_rename <target_id> <new_id>

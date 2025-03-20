@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>KeepAlive</key>
+    <false/>
+    <key>Label</key>
+    <string>com.cantecim.startuphook</string>
+    <key>ProcessType</key>
+    <string>Background</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>$$$DOTFILES_DIR$$$/daemon/startuphook.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>$$$DOTFILES_DIR$$$/daemon/startuphook.log</string>
+    <key>StandardErrorPath</key>
+    <string>$$$DOTFILES_DIR$$$/daemon/startuphook.log</string>
+  </dict>
+</plist>
