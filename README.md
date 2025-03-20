@@ -187,7 +187,7 @@ Install macOS apps defined in `install/Masfile` using mas CLI
 - etc.
 
 ### What does `startup hook` daemon injection do?
-It registers the startup daemon as launch agent under GUI (user agents) using launchctl, startup daemon basically runs the script `daemon/startuphook.sh` (see [plist file](daemon/com.cantecim.startuphook.plist))
+It registers the startup daemon as launch agent under GUI of **current user** (user agents of **current user**, i.e. **login item** for **current user**) using launchctl, startup daemon basically runs the script `daemon/startuphook.sh` (see [plist file](daemon/com.cantecim.startuphook.plist))
 
 ##### What startuphook.sh do then?
 When it started (so when computer runs) it executes `unblock-discord` command, and when shutting-down executes `unblock-quit`
