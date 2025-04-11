@@ -5,10 +5,7 @@ These are my dotfiles. Take anything you want, but at your own risk.
 It mainly targets macOS systems (should install on e.g. Ubuntu as well for many tools, config and aliases etc).
 
 # TODOs
-- [ ] Monitor git diff and git merge tool behaviors adjust gitconfig if needed
-- [ ] change dock icons
-- [ ] add cheat from codfish/dotfiles
-- [ ] consider https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/nodenv requires customization to omz theme
+- [ ] empty for now
 
 ## Highlights
 
@@ -25,8 +22,10 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - Installs spoofdpi with homebrew, you can use with `unblock` alias (A local proxy server to bypass DPI procedures of your ISP)
 - Incognito mode for zsh [thanks to Stephan Sokolow](https://blog.ssokolow.com/archives/2020/09/08/incognito-mode-for-zsh/)
 - Supports both Apple Silicon (M1) and Intel chips
+- `dot update` command to automate upgrades across all package managers
 - **NEW**: Johnny.Decimal supports
   - jd_* prefixed functions to help your JD file system
+- **EXTRA**: Lightweight command help via `tldr` CLI tool
 
 ## Packages Overview
 
@@ -35,6 +34,7 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - [Node.js + npm LTS](https://nodejs.org/en/download/) (packages: [npmfile](./install/npmfile))
 - Latest Git, Bash, Python, GNU coreutils, curl, Ruby
 - [Hammerspoon](https://www.hammerspoon.org) (config: [keybindings & window management](./config/hammerspoon))
+- [`tldr`](https://tldr.sh) - Simplified and community-driven man pages, installed via npmfile
 - `$EDITOR` is [GNU nano](https://www.nano-editor.org) (`$VISUAL` is `code` and Git `core.editor` is `code --wait`)
 
 ## Installation
@@ -154,6 +154,26 @@ If you're migrating from an existing Mac, you should first make sure to backup a
 - Did you remember to export important data from your local database?
 - Did you update [mackup](https://github.com/lra/mackup) to the latest version and ran `mackup backup`?
 
+## tldr CLI: simplified help for commands
+
+`tldr` provides simplified and community-driven manual pages. It's helpful to learn and recall common usage patterns.
+
+### Example:
+
+```bash
+tldr tar
+```
+
+### Install:
+
+```bash
+npm install -g tldr
+```
+
+Included in [`npmfile`](./install/npmfile) and installed during `make`.
+
+---
+
 ## The `dot` command
 
 ```sh
@@ -175,6 +195,19 @@ Commands:
    update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)
 ```
 
+### What is included in `dot update`?
+
+Runs system-wide update routines across various environments. It ensures all developer tools are up-to-date in a single command.
+
+- `brew upgrade` (packages and casks)
+- `npm update -g` (npmfile)
+- `pip3 install --upgrade` for global packages
+- `gem update`
+- `cargo install-update`
+- Runs system update hooks like `dot macos`
+
+Useful after long breaks or machine migrations to sync environments fast.
+
 ### What is included in `dot zsh`?
 Install extra zsh plugins
 
@@ -193,6 +226,8 @@ It registers the startup daemon as launch agent under GUI of **current user** (u
 When it started (so when computer runs) it executes `unblock-discord` command, and when shutting-down executes `unblock-quit`
 
 Basically, runs unblocker automatically to use discord without any break
+
+---
 
 ## The JD utilities
 ### jd_rename <target_id> <new_id>
