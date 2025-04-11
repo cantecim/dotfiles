@@ -11,5 +11,4 @@ release-it
 pnpm
 svgo
 tldr
-underscore-cli
 yarn

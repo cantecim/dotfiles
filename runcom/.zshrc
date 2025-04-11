@@ -78,6 +78,10 @@ zstyle ':omz:plugins:alias-finder' longer yes   # disabled by default
 zstyle ':omz:plugins:alias-finder' exact yes    # disabled by default
 zstyle ':omz:plugins:alias-finder' cheaper yes  # disabled by default
 
+# load brew zsh env (should be called before omz sourcing since it calls compinit for us)
+# see also for more : https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+is-executable brew && eval "$(brew shellenv)"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
