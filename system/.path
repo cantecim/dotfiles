@@ -31,6 +31,7 @@ prepend-path "$HOME/.deno/bin"                                          # Deno
 prepend-path "$HOME/.local/share/pnpm"
 prepend-path "$HOME/.rd/bin"                                            # Rancher Desktop
 prepend-path "$N_PREFIX/bin"
+prepend-path "$HOME/.pub-cache/bin"                                     # Flutter global pub executables
 
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
