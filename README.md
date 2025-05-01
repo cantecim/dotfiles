@@ -27,6 +27,8 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
   - jd_* prefixed functions to help your JD file system
 - **EXTRA**: Lightweight command help via `tldr` CLI tool
 
+<!-- this is a trick to prevent mark down link check action reporting false positive -->
+<!-- id="packages-overview" -->
 ## Packages Overview
 
 - [Homebrew](https://brew.sh) (packages: [Brewfile](./install/Brewfile))
@@ -120,6 +122,7 @@ mackup restore
 
 See [this section](#using-mackup) for more info
 
+<!-- id="using-mackup" -->
 ## Using `mackup`
 
 You can use mackup to backup and restore your application settings with ease.
