@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dutchakdev/markdown-links-action@v0.1.9
+      - uses: HarryVasanth/markdown-link-checker@v1
