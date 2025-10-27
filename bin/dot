@@ -5,123 +5,124 @@ COMMAND_NAME=$1
 SUB_COMMAND_NAME=$2
 
 sub_help() {
-  echo "Usage: $BIN_NAME <command>"
-  echo
-  echo "Commands:"
-  echo "   clean            Clean up caches (brew, cargo, gem, pip)"
-  echo "   dock             Apply macOS Dock settings"
-  echo "   duti             Set default apps for file types (UTI)"
-  echo "   edit             Open dotfiles in IDE ($VISUAL) and Git GUI ($VISUAL_GIT)"
-  echo "   help             This help message"
-  echo "   macos            Apply macOS system defaults"
-  echo "   zsh              Install zsh extra stuff"
-  echo "   mas              Install macOS apps from App Store using mas CLI"
-  echo "   logioptions      Install Logi Options+ app for Logitech devices"
-  echo "   startuphook      Inject startup hook daemon"
-  echo "   rm-startuphook   Remove startup hook daemon"
-  echo "   test             Run tests"
-  echo "   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)"
+    echo "Usage: $BIN_NAME <command>"
+    echo
+    echo "Commands:"
+    echo "   clean            Clean up caches (brew, cargo, gem, pip)"
+    echo "   dock             Apply macOS Dock settings"
+    echo "   duti             Set default apps for file types (UTI)"
+    echo "   edit             Open dotfiles in IDE ($VISUAL) and Git GUI ($VISUAL_GIT)"
+    echo "   help             This help message"
+    echo "   macos            Apply macOS system defaults"
+    echo "   zsh              Install zsh extra stuff"
+    echo "   mas              Install macOS apps from App Store using mas CLI"
+    echo "   logioptions      Install Logi Options+ app for Logitech devices"
+    echo "   startuphook      Inject startup hook daemon"
+    echo "   rm-startuphook   Remove startup hook daemon"
+    echo "   test             Run tests"
+    echo "   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)"
 }
 
 sub_clean() {
-  echo "$ brew cleanup"
-  brew cleanup
-  echo "$ cargo cache --autoclean"
-  cargo cache --autoclean
-  echo "$ gem cleanup"
-  gem cleanup
-  echo "$ pip cache purge"
-  pip cache purge
+    echo "$ brew cleanup"
+    brew cleanup
+    echo "$ cargo cache --autoclean"
+    cargo cache --autoclean
+    echo "$ gem cleanup"
+    gem cleanup
+    echo "$ pip cache purge"
+    pip cache purge
 }
 
 sub_dock() {
-  . "${DOTFILES_DIR}/macos/dock.sh" && echo "Dock reloaded."
+    . "${DOTFILES_DIR}/macos/dock.sh" && echo "Dock reloaded."
 }
 
 sub_edit() {
-  sh -c "$VISUAL $DOTFILES_DIR"
-  sh -c "$VISUAL_GIT $DOTFILES_DIR"
+    sh -c "$VISUAL $DOTFILES_DIR"
+    sh -c "$VISUAL_GIT $DOTFILES_DIR"
 }
 
 sub_test() {
-  bats "$DOTFILES_DIR"/test/*.bats
+    bats "$DOTFILES_DIR"/test/*.bats
 }
 
 sub_update() {
-  topgrade
+    topgrade
 }
 
 sub_duti() {
-  duti -v "${DOTFILES_DIR}/install/duti"
+    duti -v "${DOTFILES_DIR}/install/duti"
 }
 
 sub_macos() {
-  for DEFAULTS_FILE in "${DOTFILES_DIR}"/macos/defaults*.sh; do
-    echo "Applying ${DEFAULTS_FILE}" && . "${DEFAULTS_FILE}"
-  done
-  echo "Done. Some changes may require a logout/restart to take effect."
+    for DEFAULTS_FILE in "${DOTFILES_DIR}"/macos/defaults*.sh; do
+        echo "Applying ${DEFAULTS_FILE}" && . "${DEFAULTS_FILE}"
+    done
+    echo "Done. Some changes may require a logout/restart to take effect."
 }
 
 sub_zsh() {
-  echo "Installing zsh plugins..."
-
-  # Install zsh-autosuggestions
-  if [[ ! -d "$ZSH/plugins/zsh-autosuggestions" ]]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH/plugins/zsh-autosuggestions"
-  else
-    echo "zsh-autosuggestions already installed."
-  fi
-
-  [[ $? ]] && echo "Done"
+    echo "Installing zsh plugins..."
+    
+    # Install zsh-autosuggestions
+    if [[ ! -d "$ZSH/plugins/zsh-autosuggestions" ]]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH/plugins/zsh-autosuggestions"
+    else
+        echo "zsh-autosuggestions already installed."
+    fi
+    
+    [[ $? ]] && echo "Done"
 }
 
 sub_mas() {
-  echo "Installing macOS apps..."
-
-  brew bundle --file=$(DOTFILES_DIR)/install/Masfile
-
-  [[ $? ]] && echo "Done"
+    echo "Installing macOS apps..."
+    
+    brew bundle --file=$(DOTFILES_DIR)/install/Masfile
+    
+    [[ $? ]] && echo "Done"
 }
 
 sub_logioptions() {
-  echo "Installing Logi Options+..."
-
-  brew install --cask logi-options+
-
-  [[ $? ]] && echo "Done"
+    echo "Installing Logi Options+..."
+    
+    brew install --cask logi-options+
+    
+    [[ $? ]] && echo "Done"
 }
 
 sub_startuphook() {
-  echo "Injecting startup hook daemon using launchctl..."
-
-  cp "${DOTFILES_DIR}/daemon/com.cantecim.startuphook.plist" ~/Library/LaunchAgents/com.cantecim.startuphook.plist &&
-  sed -i'' "s|\\$\\$\\\$DOTFILES_DIR\\$\\$\\$|$(printf '%s\n' "$DOTFILES_DIR" | sed 's/[\/&]/\\&/g')|g" ~/Library/LaunchAgents/com.cantecim.startuphook.plist &&
-  launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist &> /dev/null ;
-  launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist
-
-  [[ $? ]] && echo "Done"
+    echo "Injecting startup hook daemon using launchctl..."
+    
+    cp "${DOTFILES_DIR}/daemon/com.cantecim.startuphook.plist" ~/Library/LaunchAgents/com.cantecim.startuphook.plist &&
+    sed -i'' "s|\\$\\$\\\$DOTFILES_DIR\\$\\$\\$|$(printf '%s\n' "$DOTFILES_DIR" | sed 's/[\/&]/\\&/g')|g" ~/Library/LaunchAgents/com.cantecim.startuphook.plist &&
+    launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist &> /dev/null ;
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist
+    
+    [[ $? ]] && echo "Done"
 }
 
 sub_rm-startuphook() {
-  echo "Removing startup daemon..."
-
-  launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist &> /dev/null ;
-  [[ -f "${DOTFILES_DIR}/daemon/startuphook.log" ]] && rm "${DOTFILES_DIR}/daemon/startuphook.log"
-  
-  [[ $? ]] && echo "Done"
+    echo "Removing startup daemon..."
+    
+    launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.cantecim.startuphook.plist &> /dev/null &&
+    rm ~/Library/LaunchAgents/com.cantecim.startuphook.plist ;
+    [[ -f "${DOTFILES_DIR}/daemon/startuphook.log" ]] && rm "${DOTFILES_DIR}/daemon/startuphook.log"
+    
+    [[ $? ]] && echo "Done"
 }
 
 case $COMMAND_NAME in
-"" | "-h" | "--help")
-  sub_help
-  ;;
-*)
-  shift
-  sub_${COMMAND_NAME} $@
-  if [ $? = 127 ]; then
-    echo "'$COMMAND_NAME' is not a known command or has errors." >&2
-    sub_help
-    exit 1
-  fi
-  ;;
+    "" | "-h" | "--help")
+        sub_help
+    ;;
+    *)
+        shift
+        sub_${COMMAND_NAME} $@
+        if [ $? = 127 ]; then
+            echo "'$COMMAND_NAME' is not a known command or has errors." >&2
+            sub_help
+            exit 1
+        fi
+    ;;
 esac
