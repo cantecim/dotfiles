@@ -35,6 +35,7 @@ cask "whatsapp"
 cask "tor-browser"
 cask "jordanbaird-ice"
 cask "protonvpn"
+cask "kiwix"
 
 # cask "proton-drive"
 # cask "firefox"
