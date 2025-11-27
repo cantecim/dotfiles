@@ -177,7 +177,7 @@ Included in [`npmfile`](./install/npmfile) and installed during `make`.
 
 ---
 
-## The `dot` command
+## The `dot` (or `dotfiles`) command
 
 ```sh
 $ dot help
@@ -186,6 +186,7 @@ Usage: dot <command>
 Commands:
    clean            Clean up caches (brew, cargo, gem, pip)
    dock             Apply macOS Dock settings
+   duti             Set default apps for file types (UTI)
    edit             Open dotfiles in IDE ($VISUAL) and Git GUI ($VISUAL_GIT)
    help             This help message
    macos            Apply macOS system defaults
@@ -219,7 +220,15 @@ Install extra zsh plugins
 ### What is included in `dot mas`?
 Install macOS apps defined in `install/Masfile` using mas CLI
 
+- Xcode
 - Microsoft To Do
+- 1Focus
+- Flow
+- Day Progress
+- Menu Bar Calendar
+- MoneyWiz
+- Pages
+- Numbers
 - etc.
 
 ### What does `startup hook` daemon injection do?
