@@ -6,7 +6,7 @@ is-executable getconf && PATH=$($(command -v getconf) PATH)
 export HOMEBREW_PREFIX=$($DOTFILES_DIR/bin/is-supported $DOTFILES_DIR/bin/is-arm64 /opt/homebrew /usr/local)
 
 prepend-path() {
-  [ -d $1 ] && PATH="$1:$PATH"
+    [ -d $1 ] && PATH="$1:$PATH"
 }
 
 # Prepend new items to path (if directory exists)
@@ -32,6 +32,7 @@ prepend-path "$HOME/.local/share/pnpm"
 prepend-path "$HOME/.rd/bin"                                            # Rancher Desktop
 prepend-path "$N_PREFIX/bin"
 prepend-path "$HOME/.pub-cache/bin"                                     # Flutter global pub executables
+prepend-path "$HOME/.antigravity/antigravity/bin"                       # Antigravity
 
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
