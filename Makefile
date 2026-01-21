@@ -3,7 +3,8 @@ OS := $(shell bin/is-supported bin/is-macos macos linux)
 HOMEBREW_PREFIX := $(shell bin/is-supported bin/is-macos $(shell bin/is-supported bin/is-arm64 /opt/homebrew /usr/local) /home/linuxbrew/.linuxbrew)
 export N_PREFIX = $(HOME)/.n
 PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(N_PREFIX)/bin:$(PATH)
-SHELL := env PATH=$(PATH) /bin/zsh
+export PATH
+SHELL := env /bin/zsh
 SHELLS := /private/etc/shells
 BIN := $(HOMEBREW_PREFIX)/bin
 export XDG_CONFIG_HOME = $(HOME)/.config
@@ -53,12 +54,12 @@ link: stow-$(OS)
 	mkdir -p $(HOME)/.local/runtime
 	chmod 700 $(HOME)/.local/runtime
 	stow -t "$(HOME)" runcom
-	ln -sfn "$(XDG_CONFIG_HOME)/codex" "$(HOME)/codex"
+	ln -sfn "$(XDG_CONFIG_HOME)/codex" "$(HOME)/.codex"
 
 unlink: stow-$(OS)
 	stow --delete -t "$(HOME)" runcom
 	stow --delete -t "$(XDG_CONFIG_HOME)" config
-	rm -f "$(HOME)/codex"
+	rm -f "$(HOME)/.codex"
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE.bak ]; then \
 		mv -v $(HOME)/$$FILE.bak $(HOME)/$${FILE%%.bak}; fi; done
 

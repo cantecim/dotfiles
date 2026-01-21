@@ -4,3 +4,6 @@ __pycache__
 .history
 
 daemon/startuphook.log
+
+config/codex
+!config/codex/config.toml
