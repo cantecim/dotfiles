@@ -1,0 +1,26 @@
+approval_mode = "read-only"
+
+# Reduce the chance of leaking secrets to subprocesses.
+[shell_environment_policy]
+inherit = "core"  # use "none" if your tooling still works
+
+exclude = [
+  "*KEY*",
+  "*TOKEN*",
+  "*SECRET*",
+  "*PASSWORD*",
+  "AWS_*",
+  "GCP_*",
+  "AZURE_*",
+  "SENTRY_*",
+  "GITHUB_*",
+  "NPM_TOKEN",
+  "NODE_AUTH_TOKEN"
+]
+
+include = [
+  "PATH",
+  "HOME",
+  "LANG",
+  "LC_ALL"
+]

@@ -53,10 +53,12 @@ link: stow-$(OS)
 	mkdir -p $(HOME)/.local/runtime
 	chmod 700 $(HOME)/.local/runtime
 	stow -t "$(HOME)" runcom
+	ln -sfn "$(XDG_CONFIG_HOME)/codex" "$(HOME)/codex"
 
 unlink: stow-$(OS)
 	stow --delete -t "$(HOME)" runcom
 	stow --delete -t "$(XDG_CONFIG_HOME)" config
+	rm -f "$(HOME)/codex"
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE.bak ]; then \
 		mv -v $(HOME)/$$FILE.bak $(HOME)/$${FILE%%.bak}; fi; done
 
