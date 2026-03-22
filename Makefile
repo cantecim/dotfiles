@@ -2,7 +2,7 @@ DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 OS := $(shell bin/is-supported bin/is-macos macos linux)
 HOMEBREW_PREFIX := $(shell bin/is-supported bin/is-macos $(shell bin/is-supported bin/is-arm64 /opt/homebrew /usr/local) /home/linuxbrew/.linuxbrew)
 export N_PREFIX = $(HOME)/.n
-PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(N_PREFIX)/bin:$(PATH)
+PATH := $(N_PREFIX)/bin:$(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(PATH)
 export PATH
 SHELL := env /bin/zsh
 SHELLS := /private/etc/shells

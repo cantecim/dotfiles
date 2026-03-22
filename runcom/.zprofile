@@ -21,6 +21,11 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
+# load brew zsh env (should be called before omz sourcing since it calls compinit for us)
+# see also for more : https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+# we change the order of homebrew paths in system/.path, give priority to n's binary path
+is-executable brew && eval "$(brew shellenv)"
+
 for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,n,path,env,exports,alias,grep,fix,zoxide}; do
   . "$DOTFILE"
 done

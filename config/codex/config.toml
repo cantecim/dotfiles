@@ -1,31 +1,13 @@
 approval_mode = "read-only"
-model = "gpt-5.2-codex"
+model = "gpt-5.4"
 model_reasoning_effort = "medium"
+personality = "pragmatic"
 
 [sandbox_workspace_write]
 network_access = true
 
-# Reduce the chance of leaking secrets to subprocesses.
 [shell_environment_policy]
-inherit = "core"  # use "none" if your tooling still works
+inherit = "core"
+exclude = [ "*KEY*", "*TOKEN*", "*SECRET*", "*PASSWORD*", "AWS_*", "GCP_*", "AZURE_*", "SENTRY_*", "GITHUB_*", "NPM_TOKEN", "NODE_AUTH_TOKEN" ]
+include = [ "PATH", "HOME", "LANG", "LC_ALL" ]
 
-exclude = [
-  "*KEY*",
-  "*TOKEN*",
-  "*SECRET*",
-  "*PASSWORD*",
-  "AWS_*",
-  "GCP_*",
-  "AZURE_*",
-  "SENTRY_*",
-  "GITHUB_*",
-  "NPM_TOKEN",
-  "NODE_AUTH_TOKEN"
-]
-
-include = [
-  "PATH",
-  "HOME",
-  "LANG",
-  "LC_ALL"
-]
