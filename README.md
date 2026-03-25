@@ -5,6 +5,7 @@ These are my dotfiles. Take anything you want, but at your own risk.
 It mainly targets macOS systems (should install on e.g. Ubuntu as well for many tools, config and aliases etc).
 
 # TODOs
+
 - [ ] empty for now
 
 ## Highlights
@@ -24,11 +25,12 @@ It mainly targets macOS systems (should install on e.g. Ubuntu as well for many 
 - Supports both Apple Silicon (M1) and Intel chips
 - `dot update` command to automate upgrades across all package managers
 - **NEW**: Johnny.Decimal supports
-  - jd_* prefixed functions to help your JD file system
+  - jd\_\* prefixed functions to help your JD file system
 - **EXTRA**: Lightweight command help via `tldr` CLI tool
 
 <!-- this is a trick to prevent mark down link check action reporting false positive -->
 <!-- id="packages-overview" -->
+
 ## Packages Overview
 
 - [Homebrew](https://brew.sh) (packages: [Brewfile](./install/Brewfile))
@@ -122,7 +124,16 @@ mackup restore
 
 See [this section](#using-mackup) for more info
 
+1. Enable special env setup for Claude Code
+
+```sh
+touch ~/.claude_env
+```
+
+Put special env setup needs for Claude Code into the file
+
 <!-- id="using-mackup" -->
+
 ## Using `mackup`
 
 You can use mackup to backup and restore your application settings with ease.
@@ -142,9 +153,11 @@ mackup backup
 ```
 
 ### Default settings
+
 Mackup is configured to use iCloud as storage engine, this means it will backup to and restore from there.
 
 ### WARNING
+
 > ⚠️ before switching to another device, make sure you backup your data!
 
 ### Backup your data
@@ -213,11 +226,13 @@ Runs system-wide update routines across various environments. It ensures all dev
 Useful after long breaks or machine migrations to sync environments fast.
 
 ### What is included in `dot zsh`?
+
 Install extra zsh plugins
 
 - zsh-syntax-highlighting
 
 ### What is included in `dot mas`?
+
 Install macOS apps defined in `install/Masfile` using mas CLI
 
 - Xcode
@@ -232,9 +247,11 @@ Install macOS apps defined in `install/Masfile` using mas CLI
 - etc.
 
 ### What does `startup hook` daemon injection do?
+
 It registers the startup daemon as launch agent under GUI of **current user** (user agents of **current user**, i.e. **login item** for **current user**) using launchctl, startup daemon basically runs the script `daemon/startuphook.sh` (see [plist file](daemon/com.cantecim.startuphook.plist))
 
 ##### What startuphook.sh do then?
+
 When it started (so when computer runs) it executes `unblock-discord` command, and when shutting-down executes `unblock-quit`
 
 Basically, runs unblocker automatically to use discord without any break
@@ -242,12 +259,15 @@ Basically, runs unblocker automatically to use discord without any break
 ---
 
 ## The JD utilities
+
 ### jd_rename <target_id> <new_id>
+
 If you would like to rename/shift/move your IDs use this function
 
 ### more TBImplemented
 
 ## How to use incognito mode
+
 Type `anonsh` to go incognito in your current shell, but beware that you still need to run clean up commands before exiting
 
 - Use `clear` to clear both the screen and scrollback buffer

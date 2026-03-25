@@ -11,3 +11,27 @@ inherit = "core"
 exclude = [ "*KEY*", "*TOKEN*", "*SECRET*", "*PASSWORD*", "AWS_*", "GCP_*", "AZURE_*", "SENTRY_*", "GITHUB_*", "NPM_TOKEN", "NODE_AUTH_TOKEN" ]
 include = [ "PATH", "HOME", "LANG", "LC_ALL" ]
 
+[projects."/Users/cantecim/Desktop/Projects/Myself/universal-sync-infra-nestjs"]
+trust_level = "trusted"
+
+[projects."/Users/cantecim/Desktop/Projects/Kidooverse/kidooverse-shopify-middleware"]
+trust_level = "trusted"
+
+[projects."/Users/cantecim/tmpcd"]
+trust_level = "trusted"
+
+[projects."/Users/cantecim/Desktop/Projects/Myself/PencilVibeDesignTest"]
+trust_level = "trusted"
+
+[projects."/Users/cantecim/Desktop/Projects/Kidooverse/website"]
+trust_level = "trusted"
+
+[features]
+multi_agent = true
+
+[notice.model_migrations]
+"gpt-5.2-codex" = "gpt-5.4"
+
+[mcp_servers.pencil]
+command = "/Applications/Pencil.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64"
+args = [ "--app", "desktop" ]
