@@ -49,6 +49,7 @@ brew "rust"
 brew "shellcheck"
 brew "autoenv"
 brew "libpq"
+brew "opencode"
 
 # media
 brew "ffmpeg"
