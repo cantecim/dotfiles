@@ -20,6 +20,9 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 [ -d "$DOTFILES_DIR/bin" ] && PATH="$DOTFILES_DIR/bin:$PATH"
 [ -d "$HOME/.n/bin" ] && PATH="$HOME/.n/bin:$PATH"
 [ -d "$HOME/.local/share/pnpm" ] && PATH="$HOME/.local/share/pnpm:$PATH"
+[ -d "/opt/homebrew/bin" ] && PATH="/opt/homebrew/bin:$PATH"
+[ -d "/opt/homebrew/sbin" ] && PATH="/opt/homebrew/sbin:$PATH"
+[ -d "/opt/homebrew/opt/python/libexec/bin" ] && PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
 
 # If not running interactively, don't do anything
 
