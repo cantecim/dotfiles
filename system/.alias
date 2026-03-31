@@ -42,7 +42,7 @@ LS_COLORIZED=$(is-supported "ls --color" --color -G)
 LS_TIMESTYLEISO=$(is-supported "ls --time-style=long-iso" --time-style=long-iso)
 LS_GROUPDIRSFIRST=$(is-supported "ls --group-directories-first" --group-directories-first)
 
-unalias ls &> /dev/null # oh-my-zsh aliases it to hide groups, remove alias.
+unalias ls &>/dev/null # oh-my-zsh aliases it to hide groups, remove alias.
 alias l="ls -lahA $LS_COLORIZED $LS_TIMESTYLEISO $LS_GROUPDIRSFIRST"
 alias ll="ls -lA $LS_COLORIZED"
 alias lt="ls -lhAtr $LS_COLORIZED $LS_TIMESTYLEISO $LS_GROUPDIRSFIRST"
@@ -55,8 +55,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias -- -="cd -"                  # Go to previous dir with -
-alias cd.='cd $(readlink -f .)'    # Go to real dir (i.e. if current dir is linked)
+alias -- -="cd -"               # Go to previous dir with -
+alias cd.='cd $(readlink -f .)' # Go to real dir (i.e. if current dir is linked)
 
 # p/npm
 
@@ -84,3 +84,4 @@ alias unblock-discord='sudo screen -S unblock -d -m sudo spoofdpi --system-proxy
 alias unblock-show='sudo screen -x unblock'
 alias unblock-hide='sudo screen -d unblock'
 alias unblock-quit='sudo screen -SX unblock at "#" stuff '^C' && sudo screen -SX unblock quit; sudo killall spoofdpi'
+alias watchllm='watch -c -i 1 '\''clear; ps ax -o pid,ppid,%cpu,%mem,etime,command | grep -E "codex|claude" | grep -v grep'\'
