@@ -130,6 +130,10 @@ See [this section](#using-mackup) for more info
 touch ~/.claude_env
 ```
 
+### WARNING
+
+> ⚠️ do not use empty env file, it might break shell tool, see the issue [#40977](https://github.com/anthropics/claude-code/issues/40977) for more info
+
 Put special env setup needs for Claude Code into the file
 
 <!-- id="using-mackup" -->

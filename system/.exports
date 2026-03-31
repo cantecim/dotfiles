@@ -1,1 +1,1 @@
-[[ -f "${HOME}/.claude_env" ]] && export CLAUDE_ENV_FILE="${HOME}/.claude_env"
+[[ -f "${HOME}/.claude_env" ]] && grep -qv '^[[:space:]]*#\|^[[:space:]]*$' "${HOME}/.claude_env" && export CLAUDE_ENV_FILE="${HOME}/.claude_env"
