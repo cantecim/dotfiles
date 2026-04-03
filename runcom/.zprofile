@@ -17,16 +17,21 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 # Restore essential toolchain paths after macOS /etc/zprofile path_helper runs.
 # Keep this minimal so non-interactive login shells (e.g. Codex `zsh -lc`) can
 # still resolve Node/pnpm even though the rest of this file stays interactive-only.
-[ -d "$DOTFILES_DIR/bin" ] && PATH="$DOTFILES_DIR/bin:$PATH"
-[ -d "$HOME/.n/bin" ] && PATH="$HOME/.n/bin:$PATH"
-[ -d "$HOME/.local/share/pnpm" ] && PATH="$HOME/.local/share/pnpm:$PATH"
 [ -d "/opt/homebrew/bin" ] && PATH="/opt/homebrew/bin:$PATH"
 [ -d "/opt/homebrew/sbin" ] && PATH="/opt/homebrew/sbin:$PATH"
 [ -d "/opt/homebrew/opt/python/libexec/bin" ] && PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
+[ -d "$DOTFILES_DIR/bin" ] && PATH="$DOTFILES_DIR/bin:$PATH"
+[ -d "$HOME/.local/share/pnpm" ] && PATH="$HOME/.local/share/pnpm:$PATH"
+[ -d "$HOME/.n/bin" ] && PATH="$HOME/.n/bin:$PATH"
 
 # If not running interactively, don't do anything
 
 [ -z "$PS1" ] && return
+
+# load brew zsh env (should be called before omz sourcing since it calls compinit for us)
+# see also for more : https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+# we change the order of homebrew paths in system/.path, give priority to n's binary path
+is-executable brew && eval "$(brew shellenv zsh)"
 
 # Source the dotfiles (order matters)
 
@@ -53,8 +58,3 @@ export DOTFILES_DIR
 export AUTOENV_ENV_FILENAME=.auto.env
 source /opt/homebrew/opt/autoenv/activate.sh
 # autoenv end
-
-# load brew zsh env (should be called before omz sourcing since it calls compinit for us)
-# see also for more : https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-# we change the order of homebrew paths in system/.path, give priority to n's binary path
-is-executable brew && eval "$(brew shellenv zsh)"
