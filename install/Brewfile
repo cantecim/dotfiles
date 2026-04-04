@@ -14,6 +14,7 @@ brew "thefuck"
 brew "topgrade"
 brew "mas"
 brew "mackup"
+brew "tmux"
 
 # fs/network
 brew "bat"
