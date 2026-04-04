@@ -55,11 +55,13 @@ link: stow-$(OS)
 	chmod 700 $(HOME)/.local/runtime
 	stow -t "$(HOME)" runcom
 	ln -sfn "$(XDG_CONFIG_HOME)/codex" "$(HOME)/.codex"
+	ln -sfn "$(XDG_CONFIG_HOME)/gemini" "$(HOME)/.gemini"
 
 unlink: stow-$(OS)
 	stow --delete -t "$(HOME)" runcom
 	stow --delete -t "$(XDG_CONFIG_HOME)" config
 	rm -f "$(HOME)/.codex"
+	rm -f "$(HOME)/.gemini"
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE.bak ]; then \
 		mv -v $(HOME)/$$FILE.bak $(HOME)/$${FILE%%.bak}; fi; done
 

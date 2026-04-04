@@ -5,5 +5,8 @@ __pycache__
 
 daemon/startuphook.log
 
-config/codex
+config/codex/*
 !config/codex/config.toml
+
+config/gemini/*
+!config/gemini/settings.json
