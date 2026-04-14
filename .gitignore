@@ -7,6 +7,10 @@ daemon/startuphook.log
 
 config/codex/*
 !config/codex/config.toml
+!config/codex/skills
+
+config/codex/skills/*
+!config/codex/skills/fix-the-class-not-the-case
 
 config/gemini/*
 !config/gemini/settings.json
