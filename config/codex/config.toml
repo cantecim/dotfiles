@@ -2,10 +2,10 @@ approval_mode = "read-only"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 personality = "pragmatic"
-model_context_window = 625000
-model_auto_compact_token_limit = 565000
-# model_context_window = 1000000
-# model_auto_compact_token_limit = 900000
+# model_context_window = 625000
+# model_auto_compact_token_limit = 565000
+model_context_window = 1000000
+model_auto_compact_token_limit = 900000
 
 [sandbox_workspace_write]
 network_access = true
