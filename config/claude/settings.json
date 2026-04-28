@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": ["Bash"]
+  },
+  "model": "opus[1m]",
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
+  },
+  "sandbox": {
+    "enabled": true
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "light"
+}

@@ -15,3 +15,6 @@ config/codex/skills/*
 
 config/gemini/*
 !config/gemini/settings.json
+
+config/claude/*
+!config/claude/settings.json
