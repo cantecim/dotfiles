@@ -11,8 +11,9 @@ export XDG_CONFIG_HOME = $(HOME)/.config
 export ZSH_HOME = $(HOME)/.zsh
 export STOW_DIR = $(DOTFILES_DIR)
 export ACCEPT_EULA=Y
+CONFIG_FILES := $(shell if git -C "$(DOTFILES_DIR)" rev-parse --is-inside-work-tree >/dev/null 2>&1; then git -C "$(DOTFILES_DIR)" ls-files config; else cd "$(DOTFILES_DIR)" && find config -type f | sort; fi)
 
-.PHONY: test
+.PHONY: test config-link config-unlink config-apply
 
 all: $(OS)
 
@@ -50,20 +51,78 @@ link: stow-$(OS)
 	mkdir -p "$(ZSH_HOME)"
 	mkdir -p "$(XDG_CONFIG_HOME)"
 	stow --no-folding -t "$(ZSH_HOME)" zsh
-	stow -t "$(XDG_CONFIG_HOME)" config
+	$(MAKE) config-link
 	mkdir -p $(HOME)/.local/runtime
 	chmod 700 $(HOME)/.local/runtime
 	stow -t "$(HOME)" runcom
-	ln -sfn "$(XDG_CONFIG_HOME)/codex" "$(HOME)/.codex"
-	ln -sfn "$(XDG_CONFIG_HOME)/gemini" "$(HOME)/.gemini"
 
 unlink: stow-$(OS)
 	stow --delete -t "$(HOME)" runcom
-	stow --delete -t "$(XDG_CONFIG_HOME)" config
-	rm -f "$(HOME)/.codex"
-	rm -f "$(HOME)/.gemini"
+	$(MAKE) config-unlink
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE.bak ]; then \
 		mv -v $(HOME)/$$FILE.bak $(HOME)/$${FILE%%.bak}; fi; done
+
+config-link:
+	$(MAKE) config-apply ACTION=link
+
+config-unlink:
+	$(MAKE) config-apply ACTION=unlink
+
+config-apply:
+	@set -e; \
+	config_destination() { \
+		case "$$1" in \
+			config/codex/*) echo "$(HOME)/.codex/$${1#config/codex/}" ;; \
+			config/gemini/*) echo "$(HOME)/.gemini/$${1#config/gemini/}" ;; \
+			config/claude/*) echo "$(HOME)/.claude/$${1#config/claude/}" ;; \
+			*) echo "$(XDG_CONFIG_HOME)/$${1#config/}" ;; \
+		esac; \
+	}; \
+	canonical_path() { \
+		echo "$$(cd "$$(dirname "$$1")" && pwd -P)/$$(basename "$$1")"; \
+	}; \
+	symlink_target_path() { \
+		LINK="$$1"; \
+		TARGET="$$(readlink "$$LINK")"; \
+		case "$$TARGET" in \
+			/*) canonical_path "$$TARGET" ;; \
+			*) canonical_path "$$(dirname "$$LINK")/$$TARGET" ;; \
+		esac; \
+	}; \
+	is_expected_symlink() { \
+		[ "$$(symlink_target_path "$$1")" = "$$(canonical_path "$$2")" ]; \
+	}; \
+	for FILE in $(CONFIG_FILES); do \
+		SRC="$(DOTFILES_DIR)/$$FILE"; \
+		DST="$$(config_destination "$$FILE")"; \
+		if [ "$(ACTION)" = "link" ]; then \
+			mkdir -p "$$(dirname "$$DST")"; \
+			if [ -L "$$DST" ]; then \
+				if is_expected_symlink "$$DST" "$$SRC"; then \
+					continue; \
+				fi; \
+				echo "Refusing to replace existing symlink: $$DST -> $$(readlink "$$DST")" >&2; \
+				exit 1; \
+			elif [ -e "$$DST" ]; then \
+				echo "Refusing to replace existing file: $$DST" >&2; \
+				exit 1; \
+			fi; \
+			ln -s "$$SRC" "$$DST"; \
+		elif [ "$(ACTION)" = "unlink" ]; then \
+			if [ -L "$$DST" ]; then \
+				if ! is_expected_symlink "$$DST" "$$SRC"; then \
+					echo "Refusing to detach unexpected symlink: $$DST -> $$(readlink "$$DST")" >&2; \
+					exit 1; \
+				fi; \
+				TMP="$$(mktemp "$${DST}.tmp.XXXXXX")"; \
+				cp "$$SRC" "$$TMP"; \
+				mv "$$TMP" "$$DST"; \
+			fi; \
+		else \
+			echo "Unsupported config action: $(ACTION)" >&2; \
+			exit 1; \
+		fi; \
+	done
 
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
