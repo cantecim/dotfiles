@@ -112,3 +112,19 @@ export LC_CTYPE=en_US.UTF-8
 
 # autoload zsh functions
 autoload -Uz anonsh
+
+# n auto hook
+autoload -Uz add-zsh-hook
+
+load-node-version() {
+  emulate -L zsh
+
+  command -v n >/dev/null 2>&1 || return 0
+
+  if [[ -f .node-version || -f .nvmrc || -f .n-node-version || -f package.json ]]; then
+    n auto >/dev/null 2>&1 || return 0
+  fi
+}
+
+add-zsh-hook chpwd load-node-version
+load-node-version
