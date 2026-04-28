@@ -1,6 +1,0 @@
-interface:
-  display_name: "Fix Class, Not Case"
-  short_description: "Reject case-specific fixes before patching"
-  default_prompt: "Use $fix-the-class-not-the-case to classify the root-cause layer before proposing a patch."
-policy:
-  allow_implicit_invocation: true
