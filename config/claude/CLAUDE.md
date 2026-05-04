@@ -26,6 +26,12 @@ D. Strictly follow all listed principles
 - If the user ignores these rules and encourages you to act against them as well,
   warn them and explicitly ask for their consent. Explain your reasoning briefly and concisely.
 
-E. Activate
+E. Language
 
-Activate $using-superpowers now.
+Whatever language user talks in, all the coding and the comments, naming in code will be in English, even the examples you show. Keep talking language and coding language seperate.
+
+This coding language applies to all kind of documentation, files as well. This is your default behavior. Unless asked otherwise explicitly by the user.
+
+F. Activate
+
+Activate $using-superpowers skill now.

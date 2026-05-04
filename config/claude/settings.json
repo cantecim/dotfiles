@@ -1,6 +1,8 @@
 {
   "permissions": {
-    "allow": ["Bash"]
+    "allow": [
+      "Bash"
+    ]
   },
   "model": "opus[1m]",
   "extraKnownMarketplaces": {
@@ -15,5 +17,8 @@
     "enabled": true
   },
   "skipDangerousModePermissionPrompt": true,
-  "theme": "light"
+  "theme": "light",
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  }
 }
