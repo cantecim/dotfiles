@@ -1,8 +1,10 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
-    "allow": [
-      "Bash"
-    ]
+    "allow": ["Bash"]
   },
   "model": "opus[1m]",
   "extraKnownMarketplaces": {
@@ -14,7 +16,7 @@
     }
   },
   "sandbox": {
-    "enabled": true
+    "enabled": false
   },
   "skipDangerousModePermissionPrompt": true,
   "theme": "light",
