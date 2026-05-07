@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+BIN_NAME=$(basename "$0")
+COMMAND_NAME=${1:-}
+SUB_COMMAND_NAME=${2:-}
+
+sub_help() {
+  echo "Usage: $BIN_NAME <command> [args]"
+  echo
+  echo "Commands:"
+  echo "   help                         This help message"
+  echo "   rewrite-commit-dates <base>  Rewrite current branch commit dates after base ref"
+  echo
+  echo "Examples:"
+  echo "   $BIN_NAME rewrite-commit-dates origin/main"
+  echo "   $BIN_NAME rewrite-commit-dates main"
+  echo "   $BIN_NAME rewrite-commit-dates abc1234"
+}
+
+sub_rewrite-commit-dates() {
+  local base_ref="${1:-}"
+
+  if [[ -z "$base_ref" ]]; then
+    echo "ERROR: base-ref is required."
+    echo "Usage: $BIN_NAME rewrite-commit-dates <base-ref>"
+    exit 1
+  fi
+
+  local current_branch
+  current_branch="$(git branch --show-current)"
+
+  if [[ -z "$current_branch" ]]; then
+    echo "ERROR: Detached HEAD is not supported."
+    exit 1
+  fi
+
+  if ! git rev-parse --verify --quiet "$base_ref" >/dev/null; then
+    echo "ERROR: base-ref '$base_ref' is not a valid Git ref or commit."
+    exit 1
+  fi
+
+  if [[ -n "$(git status --porcelain)" ]]; then
+    echo "ERROR: Working tree is not clean. Commit or stash changes first."
+    exit 1
+  fi
+
+  local base_commit
+  base_commit="$(git merge-base HEAD "$base_ref")"
+
+  if [[ -z "$base_commit" ]]; then
+    echo "ERROR: Could not find merge-base between HEAD and '$base_ref'."
+    exit 1
+  fi
+
+  local commit_count
+  commit_count="$(git rev-list --count "${base_commit}..HEAD")"
+
+  if [[ "$commit_count" -eq 0 ]]; then
+    echo "ERROR: No branch commits found after base ref '$base_ref'."
+    echo "Nothing to rewrite."
+    exit 1
+  fi
+
+  if git merge-base --is-ancestor HEAD "$base_ref"; then
+    echo "ERROR: HEAD is already an ancestor of '$base_ref'."
+    echo "This branch does not appear to be ahead of the base ref."
+    exit 1
+  fi
+
+  local target_date
+  target_date="$(date +"%Y-%m-%dT%H:%M:%S%z")"
+
+  echo "Branch:       $current_branch"
+  echo "Base ref:     $base_ref"
+  echo "Base commit:  $base_commit"
+  echo "Commits:      $commit_count"
+  echo "Target date:  $target_date"
+  echo
+
+  export TARGET_DATE="$target_date"
+
+  git rebase \
+    --exec 'GIT_COMMITTER_DATE="$TARGET_DATE" git commit --amend --no-edit --date "$TARGET_DATE" >/dev/null' \
+    "$base_commit"
+
+  echo
+  echo "Rewritten commit dates:"
+  git log --pretty=fuller --reverse "${base_commit}..HEAD"
+
+  echo
+  echo "Expiring reflog for current branch and HEAD..."
+  git reflog expire --expire=now --expire-unreachable=now --rewrite --updateref "refs/heads/$current_branch"
+  git reflog expire --expire=now --expire-unreachable=now --rewrite --updateref HEAD
+
+  echo "Pruning unreachable objects without aggressive GC..."
+  git gc --prune=now --quiet
+
+  echo
+  echo "Done"
+}
+
+case $COMMAND_NAME in
+"" | "-h" | "--help" | "help")
+  sub_help
+  ;;
+*)
+  shift
+  sub_${COMMAND_NAME} "$@"
+  if [ $? = 127 ]; then
+    echo "'$COMMAND_NAME' is not a known command or has errors." >&2
+    sub_help
+    exit 1
+  fi
+  ;;
+esac
