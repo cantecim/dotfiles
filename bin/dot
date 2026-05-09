@@ -19,6 +19,7 @@ sub_help() {
     echo "   logioptions      Install Logi Options+ app for Logitech devices"
     echo "   startuphook      Inject startup hook daemon"
     echo "   rm-startuphook   Remove startup hook daemon"
+    echo "   superpowers      Install Superpowers skills"
     echo "   test             Run tests"
     echo "   update           Update packages and pkg managers (brew, casks, cargo, pip3, npm, gems, macOS)"
 }
@@ -91,6 +92,67 @@ sub_logioptions() {
     [[ $? ]] && echo "Done"
 }
 
+canonical_path() {
+    echo "$(cd "$(dirname "$1")" && pwd -P)/$(basename "$1")"
+}
+
+symlink_target_path() {
+    local LINK=$1
+    local TARGET
+
+    TARGET=$(readlink "$LINK")
+    case "$TARGET" in
+        /*) canonical_path "$TARGET" ;;
+        *) canonical_path "$(dirname "$LINK")/$TARGET" ;;
+    esac
+}
+
+sub_superpowers() {
+    local REPO_URL=${SUPERPOWERS_REPO_URL:-https://github.com/obra/superpowers.git}
+    local INSTALL_DIR=${SUPERPOWERS_INSTALL_DIR:-$HOME/.local/share/dotfiles/superpowers}
+    local SKILLS_LINK=${SUPERPOWERS_SKILLS_LINK:-$HOME/.agents/skills/superpowers}
+    local SKILLS_DIR="$INSTALL_DIR/skills"
+
+    if ! command -v git >/dev/null 2>&1; then
+        echo "git is required to install Superpowers." >&2
+        return 1
+    fi
+
+    mkdir -p "$(dirname "$INSTALL_DIR")" "$(dirname "$SKILLS_LINK")" || return 1
+
+    if [[ -d "$INSTALL_DIR/.git" ]]; then
+        echo "Updating Superpowers..."
+        git -C "$INSTALL_DIR" pull --ff-only || return 1
+    elif [[ -e "$INSTALL_DIR" ]]; then
+        echo "Refusing to use existing non-git path: $INSTALL_DIR" >&2
+        return 1
+    else
+        echo "Cloning Superpowers..."
+        git clone "$REPO_URL" "$INSTALL_DIR" || return 1
+    fi
+
+    if [[ ! -d "$SKILLS_DIR" ]]; then
+        echo "Superpowers skills directory not found: $SKILLS_DIR" >&2
+        return 1
+    fi
+
+    if [[ -L "$SKILLS_LINK" ]]; then
+        if [[ "$(symlink_target_path "$SKILLS_LINK")" == "$(canonical_path "$SKILLS_DIR")" ]]; then
+            echo "Superpowers skills already linked."
+            return 0
+        fi
+
+        echo "Refusing to replace existing symlink: $SKILLS_LINK -> $(readlink "$SKILLS_LINK")" >&2
+        return 1
+    elif [[ -e "$SKILLS_LINK" ]]; then
+        echo "Refusing to replace existing path: $SKILLS_LINK" >&2
+        return 1
+    fi
+
+    ln -s "$SKILLS_DIR" "$SKILLS_LINK" || return 1
+    echo "Done"
+}
+
 sub_startuphook() {
     echo "Injecting startup hook daemon using launchctl..."
     
@@ -118,11 +180,13 @@ case $COMMAND_NAME in
     ;;
     *)
         shift
-        sub_${COMMAND_NAME} $@
-        if [ $? = 127 ]; then
+        sub_${COMMAND_NAME} "$@"
+        STATUS=$?
+        if [ $STATUS = 127 ]; then
             echo "'$COMMAND_NAME' is not a known command or has errors." >&2
             sub_help
             exit 1
         fi
+        exit $STATUS
     ;;
 esac

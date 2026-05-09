@@ -13,13 +13,13 @@ export STOW_DIR = $(DOTFILES_DIR)
 export ACCEPT_EULA=Y
 CONFIG_FILES := $(shell if git -C "$(DOTFILES_DIR)" rev-parse --is-inside-work-tree >/dev/null 2>&1; then git -C "$(DOTFILES_DIR)" ls-files config; else cd "$(DOTFILES_DIR)" && find config -type f | sort; fi)
 
-.PHONY: test config-link config-unlink config-apply
+.PHONY: test config-link config-unlink config-apply superpowers
 
 all: $(OS)
 
-macos: sudo core-macos packages link duti
+macos: sudo core-macos packages link duti superpowers
 
-linux: core-linux link
+linux: core-linux link superpowers
 
 core-macos: omz brew bash git npm
 
@@ -169,6 +169,9 @@ rust-packages: brew-packages
 
 duti:
 	duti -v $(DOTFILES_DIR)/install/duti
+
+superpowers:
+	dot superpowers
 
 test:
 	bats test
